@@ -1,0 +1,439 @@
+:root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --text-color: #333;
+            --text-secondary: #666;
+            --bg-main: #f8f9fa;
+            --bg-card: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #4cc9f0;
+            --secondary-color: #4895ef;
+            --accent-color: #3f37c9;
+            --text-color: #e0e0e0;
+            --text-secondary: #aaa;
+            --bg-main: #121212;
+            --bg-card: #1e1e1e;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        header {
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .greeting {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .date-time {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .card-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .todo-card {
+            grid-column: span 2;
+        }
+
+        /* Todo List Styles */
+        .todo-form {
+            display: flex;
+            margin-bottom: 16px;
+        }
+
+        .todo-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-family: inherit;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+        }
+
+        .dark-mode .todo-input {
+            border-color: #444;
+        }
+
+        .todo-btn {
+            padding: 10px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .todo-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .todo-list {
+            list-style: none;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .todo-item {
+            border-bottom: 1px solid #333;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .todo-checkbox {
+            margin-right: 12px;
+            accent-color: var(--primary-color);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .todo-text {
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .todo-completed {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .todo-delete {
+            background: none;
+            border: none;
+            color: #ff4d6d;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 8px;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .todo-delete:hover {
+            opacity: 1;
+        }
+
+        /* Schedule Styles */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .schedule-table th,
+        .dark-mode .schedule-table td {
+            border-bottom: 1px solid #333;
+        }
+
+        .schedule-table th {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .schedule-subject {
+            font-weight: 500;
+        }
+
+        .schedule-location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Notes Styles */
+        .notes-textarea {
+            width: 100%;
+            height: 180px;
+            padding: 12px;
+            border-radius: var(--radius);
+            border: 1px solid #ddd;
+            resize: none;
+            font-family: inherit;
+            margin-bottom: 10px;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+        }
+
+        .dark-mode .notes-textarea {
+            border-color: #444;
+        }
+
+        .notes-save {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .notes-save:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Music Player Styles */
+        .music-player {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 16px;
+            justify-content: space-between;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .music-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        .music-title {
+            font-size: 0.9rem;
+            margin: 12px 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .music-progress {
+            width: 100%;
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .dark-mode .music-progress {
+            background-color: #333;
+        }
+
+        .music-progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Quote Styles */
+        .quote-text {
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .quote-author {
+            text-align: right;
+            color: var(--text-secondary);
+        }
+
+        .quote-refresh {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .quote-refresh:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Weather Widget Styles */
+        .weather {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        .weather-desc {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .weather-icon {
+            font-size: 3rem;
+            margin: 12px 0;
+            color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 1.5rem;
+            }
+
+            .date-time {
+                font-size: 0.9rem;
+            }
+
+            .todo-card {
+                grid-column: span 1;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(6) {
+            animation-delay: 0.5s;
+        }

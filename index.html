@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1 class="greeting">Good morning, Student</h1>
+                    <p class="date-time" id="date-time"></p>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <!-- To-do List -->
+            <section class="card todo-card">
+                <div class="card-header">
+                    <h2 class="card-title">To-do List</h2>
+                    <i class="fas fa-tasks card-icon"></i>
+                </div>
+                <form id="todo-form" class="todo-form">
+                    <input 
+                        type="text" 
+                        id="todo-input" 
+                        class="todo-input" 
+                        placeholder="Add a new task..."
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="todo-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </form>
+                <ul id="todo-list" class="todo-list"></ul>
+            </section>
+
+            <!-- Class Schedule -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Class Schedule</h2>
+                    <i class="fas fa-calendar-alt card-icon"></i>
+                </div>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="schedule-time">9:00 AM</td>
+                            <td>
+                                <div class="schedule-subject">Mathematics</div>
+                                <div class="schedule-location">Room 101</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-time">11:00 AM</td>
+                            <td>
+                                <div class="schedule-subject">Computer Science</div>
+                                <div class="schedule-location">Lab 3</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-time">2:00 PM</td>
+                            <td>
+                                <div class="schedule-subject">Physics</div>
+                                <div class="schedule-location">Room 203</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-time">4:00 PM</td>
+                            <td>
+                                <div class="schedule-subject">Literature</div>
+                                <div class="schedule-location">Room 105</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Notes Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Quick Notes</h2>
+                    <i class="fas fa-sticky-note card-icon"></i>
+                </div>
+                <textarea 
+                    id="notes-area" 
+                    class="notes-textarea" 
+                    placeholder="Write your notes here..."
+                ></textarea>
+                <button id="notes-save" class="notes-save">Save Notes</button>
+            </section>
+
+            <!-- Music Player -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Study Music</h2>
+                    <i class="fas fa-music card-icon"></i>
+                </div>
+                <div class="music-player">
+                    <audio id="audio-player">
+                        <source src="/api/placeholder/400/320" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="music-title" id="music-title">Lofi Study Beats</div>
+                    <div class="music-controls">
+                        <button class="music-btn" id="prev-btn">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="music-btn" id="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="music-btn" id="next-btn">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                    </div>
+                    <div class="music-progress">
+                        <div class="music-progress-bar" id="music-progress-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Motivational Quote -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Daily Motivation</h2>
+                    <i class="fas fa-quote-right card-icon"></i>
+                </div>
+                <div>
+                    <p id="quote-text" class="quote-text"></p>
+                    <p id="quote-author" class="quote-author"></p>
+                </div>
+                <button id="quote-refresh" class="quote-refresh">
+                    <i class="fas fa-sync"></i> New Quote
+                </button>
+            </section>
+
+            <!-- Weather Widget -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Weather</h2>
+                    <i class="fas fa-cloud-sun card-icon"></i>
+                </div>
+                <div class="weather">
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3 class="weather-temp">72°F</h3>
+                    <p class="weather-desc">Sunny</p>
+                    <p>Campus, University</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const dateTimeElement = document.getElementById('date-time');
+        const themeToggle = document.getElementById('theme-toggle');
+        const todoForm = document.getElementById('todo-form');
+        const todoInput = document.getElementById('todo-input');
+        const todoList = document.getElementById('todo-list');
+        const notesArea = document.getElementById('notes-area');
+        const notesSave = document.getElementById('notes-save');
+        const audioPlayer = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const musicTitle = document.getElementById('music-title');
+        const musicProgressBar = document.getElementById('music-progress-bar');
+        const quoteText = document.getElementById('quote-text');
+        const quoteAuthor = document.getElementById('quote-author');
+        const quoteRefresh = document.getElementById('quote-refresh');
+        const greeting = document.querySelector('.greeting');
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            dateTimeElement.textContent = now.toLocaleDateString('en-US', options);
+            
+            // Update greeting based on time of day
+            const hour = now.getHours();
+            let greetingText = 'Good morning';
+            
+            if (hour >= 12 && hour < 17) {
+                greetingText = 'Good afternoon';
+            } else if (hour >= 17) {
+                greetingText = 'Good evening';
+            }
+            
+            const name = localStorage.getItem('studentName') || 'Student';
+            greeting.textContent = `${greetingText}, ${name}`;
+
+            // Ask for name if not set
+            if (!localStorage.getItem('studentName')) {
+                setTimeout(() => {
+                    const name = prompt('What is your name?', '');
+                    if (name) {
+                        localStorage.setItem('studentName', name);
+                        greeting.textContent = `${greetingText}, ${name}`;
+                    }
+                }, 1000);
+            }
+        }
+
+        // Initial update and set interval
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Update every minute
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Toggle icon
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Todo List Functionality
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+            todoList.innerHTML = '';
+            
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'todo-checkbox';
+                checkbox.checked = todo.completed;
+                checkbox.addEventListener('change', () => toggleTodo(index));
+                
+                const text = document.createElement('span');
+                text.className = `todo-text ${todo.completed ? 'todo-completed' : ''}`;
+                text.textContent = todo.text;
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'todo-delete';
+                deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                deleteBtn.addEventListener('click', () => deleteTodo(index));
+                
+                li.appendChild(checkbox);
+                li.appendChild(text);
+                li.appendChild(deleteBtn);
+                
+                todoList.appendChild(li);
+            });
+        }
+
+        function addTodo(text) {
+            todos.push({ text, completed: false });
+            saveTodos();
+            renderTodos();
+        }
+
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            saveTodos();
+            renderTodos();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        }
+
+        todoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = todoInput.value.trim();
+            if (text) {
+                addTodo(text);
+                todoInput.value = '';
+            }
+        });
+
+        // Initial render
+        renderTodos();
+
+        // Notes Functionality
+        notesArea.value = localStorage.getItem('notes') || '';
+        
+        notesSave.addEventListener('click', () => {
+            localStorage.setItem('notes', notesArea.value);
+            notesSave.textContent = 'Saved!';
+            setTimeout(() => {
+                notesSave.textContent = 'Save Notes';
+            }, 2000);
+        });
+
+        // Music Player
+        const musicTracks = [
+            { title: "Lofi Study Beats", src: "" },
+            { title: "Ambient Focus", src: "" },
+            { title: "Deep Concentration", src: "" },
+            { title: "Calm Piano", src: "" }
+        ];
+
+        let currentTrack = 0;
+
+        function updateMusicUI() {
+            musicTitle.textContent = musicTracks[currentTrack].title;
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audioPlayer.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack - 1 + musicTracks.length) % musicTracks.length;
+            updateMusicUI();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack + 1) % musicTracks.length;
+            updateMusicUI();
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            musicProgressBar.style.width = `${progress || 0}%`;
+        });
+
+        updateMusicUI();
+
+        // Motivational Quotes
+        const quotes = [
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Education is the most powerful weapon which you can use to change the world.", author: "Nelson Mandela" },
+            { text: "The beautiful thing about learning is that no one can take it away from you.", author: "B.B. King" },
+            { text: "The more that you read, the more things you will know. The more that you learn, the more places you'll go.", author: "Dr. Seuss" },
+            { text: "Develop a passion for learning. If you do, you will never cease to grow.", author: "Anthony J. D'Angelo" },
+            { text: "The expert in anything was once a beginner.", author: "Helen Hayes" },
+            { text: "Don't let what you cannot do interfere with what you can do.", author: "John Wooden" },
+            { text: "Dream big and dare to fail.", author: "Norman Vaughan" },
+            { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
+            { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" }
+        ];
+
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteText.textContent = `"${quotes[randomIndex].text}"`;
+            quoteAuthor.textContent = `— ${quotes[randomIndex].author}`;
+        }
+
+        quoteRefresh.addEventListener('click', displayRandomQuote);
+        displayRandomQuote(); // Initial quote
+    </script>
+</body>
+</html>
